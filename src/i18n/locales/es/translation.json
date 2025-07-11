@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "jobs": "Empleos",
+    "companies": "Empresas",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "dashboard": "Panel",
+    "logout": "Cerrar sesión"
+  },
+  "hero": {
+    "title": "Encuentra tu trabajo ideal con JobTracks",
+    "subtitle": "La plataforma completa para conectar talentos y empresas. Rastrea tus aplicaciones, gestiona tus reclutamientos y acelera tu carrera.",
+    "browseJobs": "Explorar empleos",
+    "viewDemo": "Ver demo",
+    "stats": {
+      "activeJobs": "Empleos activos",
+      "companies": "Empresas",
+      "candidates": "Candidatos",
+      "satisfaction": "Tasa de satisfacción"
+    },
+    "cards": {
+      "realTime": {
+        "title": "Seguimiento en tiempo real",
+        "text": "Rastrea el progreso de tus aplicaciones"
+      },
+      "modern": {
+        "title": "Interfaz moderna",
+        "text": "Experiencia de usuario optimizada"
+      },
+      "matching": {
+        "title": "Coincidencia inteligente",
+        "text": "Encuentra perfiles perfectos"
+      }
+    }
+  },
+  "features": {
+    "title": "¿Por qué elegir JobTracks?",
+    "subtitle": "Descubre las características que hacen de JobTracks la solución de referencia para tu búsqueda de empleo y reclutamiento",
+    "items": { 
+"search": {
+        "title": "Búsqueda avanzada",
+        "description": "Filtra ofertas por sector, ubicación, salario y habilidades para encontrar el trabajo que te convenga perfectamente."
+      },
+      "dashboard": {
+        "title": "Panel completo",
+        "description": "Visualiza tus aplicaciones, entrevistas y respuestas en un panel intuitivo y personalizado."
+      },
+      "network": {
+        "title": "Red profesional",
+        "description": "Conéctate con reclutadores y profesionales de tu sector para ampliar tus oportunidades."
+      },
+      "express": {
+        "title": "Aplicación rápida",
+        "description": "Aplica con un clic con tu perfil pre-llenado y ahorra tiempo en tu proceso."
+      },
+      "training": {
+        "title": "Formación continua",
+        "description": "Accede a recursos de formación para desarrollar tus habilidades y mejorar tu perfil."
+      },
+      "alerts": {
+        "title": "Alertas inteligentes",
+        "description": "Recibe notificaciones personalizadas para ofertas que coincidan con tus criterios de búsqueda."
+      }
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "next": "Siguiente",
+    "previous": "Anterior"
+  },
+    "featuredJobs": {
+      "title": "Empleos Destacados",
+      "subtitle": "Descubre las mejores oportunidades de las mejores empresas",
+      "viewAllJobs": "Ver Todos los Empleos",
+      "loadMoreJobs": "Cargar Más Empleos",
+      "applyNow": "Aplicar Ahora",
+      "featured": "Destacado",
+      "remoteWork": "Trabajo Remoto",
+      "fullTime": "Tiempo Completo",
+      "partTime": "Tiempo Parcial",
+      "contract": "Contrato",
+      "internship": "Prácticas",
+      "daysRemaining": "{{count}} día restante",
+      "daysRemaining_plural": "{{count}} días restantes",
+      "weekRemaining": "{{count}} semana restante",
+      "weekRemaining_plural": "{{count}} semanas restantes",
+      "monthRemaining": "{{count}} mes restante",
+      "monthRemaining_plural": "{{count}} meses restantes",
+      "newJob": "Nuevo",
+      "urgent": "Urgente",
+      "salaryRange": "{{min}} - {{max}}",
+      "location": "Ubicación",
+      "jobType": "Tipo de Empleo",
+      "timePosted": "Publicado",
+      "company": "Empresa",
+      "tags": {
+        "design": "Diseño",
+        "remote": "Remoto",
+        "senior": "Senior",
+        "engineering": "Ingeniería",
+        "javascript": "JavaScript",
+        "react": "React",
+        "creative": "Creativo",
+        "junior": "Junior",
+        "product": "Producto",
+        "ios": "iOS",
+        "frontend": "Frontend",
+        "typescript": "TypeScript",
+        "data": "Datos",
+        "python": "Python",
+        "ml": "Aprendizaje Automático"
+      },
+      "actions": {
+        "like": "Me Gusta",
+        "view": "Ver",
+        "save": "Guardar",
+        "share": "Compartir"
+      },
+      "status": {
+        "applied": "Aplicado",
+        "saved": "Guardado",
+        "viewed": "Visto"
+      }
+    }
+}

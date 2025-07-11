@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "jobs": "Stellenangebote",
+    "companies": "Unternehmen",
+    "contact": "Kontakt",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "dashboard": "Dashboard",
+    "logout": "Abmelden"
+  },
+  "hero": {
+    "title": "Finden Sie Ihren idealen Job mit JobTracks",
+    "subtitle": "Die vollständige Plattform, um Talente und Unternehmen zu verbinden. Verfolgen Sie Ihre Bewerbungen, verwalten Sie Ihre Rekrutierungen und beschleunigen Sie Ihre Karriere.",
+    "browseJobs": "Jobs durchsuchen",
+    "viewDemo": "Demo ansehen",
+    "stats": {
+      "activeJobs": "Aktive Jobs",
+      "companies": "Unternehmen",
+      "candidates": "Kandidaten",
+      "satisfaction": "Zufriedenheitsrate"
+    },
+    "cards": {
+      "realTime": {
+        "title": "Echtzeitverfolgung",
+        "text": "Verfolgen Sie Ihren Bewerbungsfortschritt"
+      },
+      "modern": {
+        "title": "Moderne Benutzeroberfläche",
+        "text": "Optimierte Benutzererfahrung"
+      },
+      "matching": {
+        "title": "Intelligente Übereinstimmung",
+        "text": "Finden Sie perfekte Profile"
+      }
+    }
+  },
+  "features": {
+    "title": "Warum JobTracks wählen?",
+    "subtitle": "Entdecken Sie die Funktionen, die JobTracks zur Referenzlösung für Ihre Jobsuche und Rekrutierung machen",
+    "items": {
+      "search": {
+        "title": "Erweiterte Suche",
+        "description": "Filtern Sie Angebote nach Branche, Standort, Gehalt und Fähigkeiten, um den Job zu finden, der perfekt zu Ihnen passt."
+      },
+      "dashboard": {
+        "title": "Vollständiges Dashboard",
+        "description": "Visualisieren Sie Ihre Bewerbungen, Interviews und Antworten in einem intuitiven und personalisierten Dashboard."
+      },
+      "network": {
+        "title": "Professionelles Netzwerk",
+        "description": "Verbinden Sie sich mit Recruitern und Fachleuten aus Ihrer Branche, um Ihre Möglichkeiten zu erweitern."
+      },
+      "express": {
+        "title": "Express-Bewerbung",
+        "description": "Bewerben Sie sich mit einem Klick mit Ihrem vorgefüllten Profil und sparen Sie Zeit in Ihrem Prozess."
+      },
+      "training": {
+        "title": "Kontinuierliche Weiterbildung",
+        "description": "Greifen Sie auf Schulungsressourcen zu, um Ihre Fähigkeiten zu entwickeln und Ihr Profil zu verbessern."
+      },
+      "alerts": {
+        "title": "Intelligente Benachrichtigungen",
+        "description": "Erhalten Sie personalisierte Benachrichtigungen für Angebote, die Ihren Suchkriterien entsprechen."
+      }
+    }
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "next": "Weiter",
+    "previous": "Zurück"
+  },
+  "featuredJobs": {
+      "title": "Ausgewählte Stellenangebote",
+      "subtitle": "Entdecken Sie die besten Möglichkeiten von Top-Unternehmen",
+      "viewAllJobs": "Alle Stellenangebote Anzeigen",
+      "loadMoreJobs": "Mehr Stellenangebote Laden",
+      "applyNow": "Jetzt Bewerben",
+      "featured": "Ausgewählt",
+      "remoteWork": "Remote-Arbeit",
+      "fullTime": "Vollzeit",
+      "partTime": "Teilzeit",
+      "contract": "Vertrag",
+      "internship": "Praktikum",
+      "daysRemaining": "{{count}} Tag verbleibend",
+      "daysRemaining_plural": "{{count}} Tage verbleibend",
+      "weekRemaining": "{{count}} Woche verbleibend",
+      "weekRemaining_plural": "{{count}} Wochen verbleibend",
+      "monthRemaining": "{{count}} Monat verbleibend",
+      "monthRemaining_plural": "{{count}} Monate verbleibend",
+      "newJob": "Neu",
+      "urgent": "Dringend",
+      "salaryRange": "{{min}} - {{max}}",
+      "location": "Standort",
+      "jobType": "Stellentyp",
+      "timePosted": "Veröffentlicht",
+      "company": "Unternehmen",
+      "tags": {
+        "design": "Design",
+        "remote": "Remote",
+        "senior": "Senior",
+        "engineering": "Ingenieurwesen",
+        "javascript": "JavaScript",
+        "react": "React",
+        "creative": "Kreativ",
+        "junior": "Junior",
+        "product": "Produkt",
+        "ios": "iOS",
+        "frontend": "Frontend",
+        "typescript": "TypeScript",
+        "data": "Daten",
+        "python": "Python",
+        "ml": "Maschinelles Lernen"
+      },
+      "actions": {
+        "like": "Gefällt mir",
+        "view": "Anzeigen",
+        "save": "Speichern",
+        "share": "Teilen"
+      },
+      "status": {
+        "applied": "Beworben",
+        "saved": "Gespeichert",
+        "viewed": "Angesehen"
+      }
+    }
+  }

@@ -1,0 +1,175 @@
+{
+  "nav": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "companies": "Companies",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Sign Up",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Find your ideal job with JobTracks",
+    "subtitle": "The complete platform to connect talents and companies. Track your applications, manage your recruitments and accelerate your career.",
+    "browseJobs": "Browse Jobs",
+    "viewDemo": "View Demo",
+    "stats": {
+      "activeJobs": "Active Jobs",
+      "companies": "Companies",
+      "candidates": "Candidates",
+      "satisfaction": "Satisfaction Rate"
+    },
+    "cards": {
+      "realTime": {
+        "title": "Real-time Tracking",
+        "text": "Track your application progress"
+      },
+      "modern": {
+        "title": "Modern Interface",
+        "text": "Optimized user experience"
+      },
+      "matching": {
+        "title": "Smart Matching",
+        "text": "Find perfect profiles"
+      }
+    }
+  },
+  "features": {
+    "title": "Why choose JobTracks?",
+    "subtitle": "Discover the features that make JobTracks the reference solution for your job search and recruitment",
+    "items": {
+      "search": {
+        "title": "Advanced Search",
+        "description": "Filter offers by sector, location, salary and skills to find the job that suits you perfectly."
+      },
+      "dashboard": {
+        "title": "Complete Dashboard",
+        "description": "Visualize your applications, interviews and responses in an intuitive and personalized dashboard."
+      },
+      "network": {
+        "title": "Professional Network",
+        "description": "Connect with recruiters and professionals in your sector to expand your opportunities."
+      },
+      "express": {
+        "title": "Express Application",
+        "description": "Apply with one click with your pre-filled profile and save time in your process."
+      },
+      "training": {
+        "title": "Continuous Training",
+        "description": "Access training resources to develop your skills and boost your profile."
+      },
+      "alerts": {
+        "title": "Smart Alerts",
+        "description": "Receive personalized notifications for offers that match your search criteria."
+      }
+    }
+  },
+    "footer": {
+      "description": "JobTracks is the leading platform that connects talents and companies. Find your ideal job or the perfect candidate with our innovative tools.",
+      "quickLinks": {
+        "title": "Quick Links",
+        "home": "Home",
+        "jobs": "Jobs",
+        "companies": "Companies",
+        "about": "About",
+        "contact": "Contact"
+      },
+      "candidates": {
+        "title": "For Candidates",
+        "createAccount": "Create Account",
+        "browseJobs": "Browse Jobs",
+        "dashboard": "Dashboard",
+        "profile": "My Profile",
+        "applications": "My Applications",
+        "careerAdvice": "Career Advice"
+      },
+      "employers": {
+        "title": "For Employers",
+        "postJob": "Post a Job",
+        "dashboard": "HR Dashboard",
+        "searchCandidates": "Search Candidates",
+        "pricing": "Pricing",
+        "resources": "Resources"
+      },
+      "support": {
+        "title": "Support",
+        "help": "Help",
+        "faq": "FAQ",
+        "privacy": "Privacy",
+        "terms": "Terms of Use",
+        "cookies": "Cookie Policy"
+      },
+      "copyright": "All rights reserved."
+    },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  
+  "featuredJobs": {
+    "title": "Featured Jobs",
+    "subtitle": "Discover the best opportunities from top companies",
+    "viewAllJobs": "View All Jobs",
+    "loadMoreJobs": "Load More Jobs",
+    "applyNow": "Apply Now",
+    "featured": "Featured",
+    "remoteWork": "Remote Work",
+    "fullTime": "Full Time",
+    "partTime": "Part Time",
+    "contract": "Contract",
+    "internship": "Internship",
+    "daysRemaining": "{{count}} day remaining",
+    "daysRemaining_plural": "{{count}} days remaining",
+    "weekRemaining": "{{count}} week remaining",
+    "weekRemaining_plural": "{{count}} weeks remaining",
+    "monthRemaining": "{{count}} month remaining",
+    "monthRemaining_plural": "{{count}} months remaining",
+    "newJob": "New",
+    "urgent": "Urgent",
+    "salaryRange": "{{min}} - {{max}}",
+    "location": "Location",
+    "jobType": "Job Type",
+    "timePosted": "Posted",
+    "company": "Company",
+    "tags": {
+      "design": "Design",
+      "remote": "Remote",
+      "senior": "Senior",
+      "engineering": "Engineering",
+      "javascript": "JavaScript",
+      "react": "React",
+      "creative": "Creative",
+      "junior": "Junior",
+      "product": "Product",
+      "ios": "iOS",
+      "frontend": "Frontend",
+      "typescript": "TypeScript",
+      "data": "Data",
+      "python": "Python",
+      "ml": "Machine Learning"
+    },
+    "actions": {
+      "like": "Like",
+      "view": "View",
+      "save": "Save",
+      "share": "Share"
+    },
+    "status": {
+      "applied": "Applied",
+      "saved": "Saved",
+      "viewed": "Viewed"
+    }
+}
+}
+

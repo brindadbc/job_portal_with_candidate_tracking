@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "jobs": "Emplois",
+    "companies": "Entreprises",
+    "contact": "Contact",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "dashboard": "Dashboard",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "title": "Trouvez votre emploi idéal avec JobTracks",
+    "subtitle": "La plateforme complète pour connecter talents et entreprises. Suivez vos candidatures, gérez vos recrutements et accélérez votre carrière.",
+    "browseJobs": "Parcourir les emplois",
+    "viewDemo": "Voir la démo",
+    "stats": {
+      "activeJobs": "Emplois actifs",
+      "companies": "Entreprises",
+      "candidates": "Candidats",
+      "satisfaction": "Taux de satisfaction"
+    },
+    "cards": {
+      "realTime": {
+        "title": "Suivi en temps réel",
+        "text": "Suivez l'évolution de vos candidatures"
+      },
+      "modern": {
+        "title": "Interface moderne",
+        "text": "Expérience utilisateur optimisée"
+      },
+      "matching": {
+        "title": "Matching intelligent",
+        "text": "Trouvez les profils parfaits"
+      }
+    }
+  },
+  "features": {
+    "title": "Pourquoi choisir JobTracks ?",
+    "subtitle": "Découvrez les fonctionnalités qui font de JobTracks la solution de référence pour votre recherche d'emploi et vos recrutements",
+    "items": {
+      "search": {
+        "title": "Recherche avancée",
+        "description": "Filtrez les offres par secteur, localisation, salaire et compétences pour trouver l'emploi qui vous correspond parfaitement."
+      },
+      "dashboard": {
+        "title": "Tableau de bord complet",
+        "description": "Visualisez vos candidatures, entretiens et réponses dans un tableau de bord intuitif et personnalisé."
+      },
+      "network": {
+        "title": "Réseau professionnel",
+        "description": "Connectez-vous avec des recruteurs et des professionnels de votre secteur pour élargir vos opportunités."
+      },
+      "express": {
+        "title": "Candidature express",
+        "description": "Postulez en un clic avec votre profil pré-rempli et gagnez du temps dans vos démarches."
+      },
+      "training": {
+        "title": "Formation continue",
+        "description": "Accédez à des ressources de formation pour développer vos compétences et booster votre profil."
+      },
+      "alerts": {
+        "title": "Alertes intelligentes",
+        "description": "Recevez des notifications personnalisées pour les offres qui correspondent à vos critères de recherche."
+      }
+    }
+  },
+  "footer": {
+      "description": "JobTracks est la plateforme leader qui connecte talents et entreprises. Trouvez votre emploi idéal ou le candidat parfait avec nos outils innovants.",
+      "quickLinks": {
+        "title": "Liens rapides",
+        "home": "Accueil",
+        "jobs": "Emplois",
+        "companies": "Entreprises",
+        "about": "À propos",
+        "contact": "Contact"
+      },
+      "candidates": {
+        "title": "Pour les candidats",
+        "createAccount": "Créer un compte",
+        "browseJobs": "Parcourir les emplois",
+        "dashboard": "Tableau de bord",
+        "profile": "Mon profil",
+        "applications": "Mes candidatures",
+        "careerAdvice": "Conseils carrière"
+      },
+      "employers": {
+        "title": "Pour les entreprises",
+        "postJob": "Publier une offre",
+        "dashboard": "Tableau de bord RH",
+        "searchCandidates": "Rechercher des candidats",
+        "pricing": "Tarifs",
+        "resources": "Ressources"
+      },
+      "support": {
+        "title": "Support",
+        "help": "Aide",
+        "faq": "FAQ",
+        "privacy": "Confidentialité",
+        "terms": "Conditions d'utilisation",
+        "cookies": "Politique de cookies"
+      },
+      "copyright": "Tous droits réservés."
+    },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "next": "Suivant",
+    "previous": "Précédent"
+  },
+  
+  "featuredJobs": {
+    "title": "Offres d'Emploi en Vedette",
+    "subtitle": "Découvrez les meilleures opportunités des entreprises leaders",
+    "viewAllJobs": "Voir Toutes les Offres",
+    "loadMoreJobs": "Charger Plus d'Offres",
+    "applyNow": "Postuler Maintenant",
+    "featured": "En Vedette",
+    "remoteWork": "Travail à Distance",
+    "fullTime": "Temps Plein",
+    "partTime": "Temps Partiel",
+    "contract": "Contrat",
+    "internship": "Stage",
+    "daysRemaining": "{{count}} jour restant",
+    "daysRemaining_plural": "{{count}} jours restants",
+    "weekRemaining": "{{count}} semaine restante",
+    "weekRemaining_plural": "{{count}} semaines restantes",
+    "monthRemaining": "{{count}} mois restant",
+    "monthRemaining_plural": "{{count}} mois restants",
+    "newJob": "Nouveau",
+    "urgent": "Urgent",
+    "salaryRange": "{{min}} - {{max}}",
+    "location": "Lieu",
+    "jobType": "Type d'emploi",
+    "timePosted": "Publié",
+    "company": "Entreprise",
+    "tags": {
+      "design": "Design",
+      "remote": "Télétravail",
+      "senior": "Senior",
+      "engineering": "Ingénierie",
+      "javascript": "JavaScript",
+      "react": "React",
+      "creative": "Créatif",
+      "junior": "Junior",
+      "product": "Produit",
+      "ios": "iOS",
+      "frontend": "Frontend",
+      "typescript": "TypeScript",
+      "data": "Data",
+      "python": "Python",
+      "ml": "Machine Learning"
+    },
+    "actions": {
+      "like": "J'aime",
+      "view": "Voir",
+      "save": "Sauvegarder",
+      "share": "Partager"
+    },
+    "status": {
+      "applied": "Candidature envoyée",
+      "saved": "Sauvegardé",
+      "viewed": "Consulté"
+    }
+  }
+
+
+}
