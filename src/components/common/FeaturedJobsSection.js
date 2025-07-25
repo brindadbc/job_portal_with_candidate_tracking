@@ -578,17 +578,59 @@
 // export default FeaturedJobsSection;
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ChevronRight, MapPin, Clock, Users, Briefcase, Star, Eye, Heart, Bookmark, Share2 } from 'lucide-react';
+import { ChevronRight, MapPin, Clock, Users, Briefcase, Star, Eye, Heart, Bookmark, Share2, X, ArrowLeft, ExternalLink } from 'lucide-react';
 
 const FeaturedJobsSection = () => {
-  const { t } = useTranslation();
   const [visibleJobs, setVisibleJobs] = useState(4);
+    const navigate = useNavigate();
   const [likedJobs, setLikedJobs] = useState(new Set());
   const [savedJobs, setSavedJobs] = useState(new Set());
   const [viewedJobs, setViewedJobs] = useState(new Set());
+  const [showAllJobs, setShowAllJobs] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
 
-  // Données d'exemple des offres d'emploi
+  // Mock translation function
+ 
+  const t = (key, options = {}) => {
+    const translations = {
+      'featuredJobs.title': 'Emplois en Vedette',
+      'featuredJobs.subtitle': 'Découvrez les meilleures opportunités des entreprises de premier plan',
+      'featuredJobs.viewAllJobs': 'Voir Tous les Emplois',
+      'featuredJobs.loadMoreJobs': 'Charger Plus d\'Emplois',
+      'featuredJobs.applyNow': 'Postuler Maintenant',
+      'featuredJobs.featured': 'En Vedette',
+      'featuredJobs.urgent': 'Urgent',
+      'featuredJobs.remoteWork': 'Travail à Distance',
+      'featuredJobs.fullTime': 'Temps Plein',
+      'featuredJobs.partTime': 'Temps Partiel',
+      'featuredJobs.daysRemaining': `${options.count} jours restants`,
+      'featuredJobs.weekRemaining': `${options.count} semaine restante`,
+      'featuredJobs.actions.view': 'Voir',
+      'featuredJobs.actions.save': 'Sauvegarder',
+      'featuredJobs.actions.like': 'Aimer',
+      'featuredJobs.tags.design': 'Design',
+      'featuredJobs.tags.remote': 'Remote',
+      'featuredJobs.tags.senior': 'Senior',
+      'featuredJobs.tags.engineering': 'Ingénierie',
+      'featuredJobs.tags.javascript': 'JavaScript',
+      'featuredJobs.tags.react': 'React',
+      'featuredJobs.tags.creative': 'Créatif',
+      'featuredJobs.tags.junior': 'Junior',
+      'featuredJobs.tags.product': 'Produit',
+      'featuredJobs.tags.ios': 'iOS',
+      'featuredJobs.tags.frontend': 'Frontend',
+      'featuredJobs.tags.typescript': 'TypeScript',
+      'featuredJobs.tags.data': 'Data',
+      'featuredJobs.tags.python': 'Python',
+      'featuredJobs.tags.ml': 'ML'
+    };
+    return translations[key] || key;
+  };
+
+  // Données d'exemple des offres d'emploi étendues
   const featuredJobs = [
     {
       id: 1,
@@ -602,7 +644,10 @@ const FeaturedJobsSection = () => {
       color: "bg-green-500",
       featured: true,
       urgent: false,
-      tags: [t('featuredJobs.tags.design'), t('featuredJobs.tags.remote'), t('featuredJobs.tags.senior')]
+      tags: [t('featuredJobs.tags.design'), t('featuredJobs.tags.remote'), t('featuredJobs.tags.senior')],
+      description: "Nous recherchons un UX Designer senior pour rejoindre notre équipe produit. Vous travaillerez sur des projets innovants et aurez l'opportunité de façonner l'expérience utilisateur de millions d'utilisateurs.",
+      requirements: ["5+ ans d'expérience en UX Design", "Maîtrise de Figma et Adobe Suite", "Expérience en design thinking", "Portfolio solide requis"],
+      benefits: ["Assurance santé complète", "Travail flexible", "Formation continue", "Stock options"]
     },
     {
       id: 2,
@@ -616,7 +661,10 @@ const FeaturedJobsSection = () => {
       color: "bg-blue-600",
       featured: true,
       urgent: true,
-      tags: [t('featuredJobs.tags.engineering'), t('featuredJobs.tags.javascript'), t('featuredJobs.tags.react')]
+      tags: [t('featuredJobs.tags.engineering'), t('featuredJobs.tags.javascript'), t('featuredJobs.tags.react')],
+      description: "Rejoignez notre équipe d'ingénieurs pour développer des applications révolutionnaires. Vous travaillerez sur des technologies de pointe dans un environnement collaboratif.",
+      requirements: ["Diplôme en informatique", "3+ ans d'expérience en développement", "Maîtrise de React et Node.js", "Expérience avec les bases de données"],
+      benefits: ["Salaire compétitif", "Bonus annuel", "Équipement fourni", "Congés illimités"]
     },
     {
       id: 3,
@@ -630,7 +678,10 @@ const FeaturedJobsSection = () => {
       color: "bg-red-500",
       featured: false,
       urgent: false,
-      tags: [t('featuredJobs.tags.design'), t('featuredJobs.tags.creative'), t('featuredJobs.tags.junior')]
+      tags: [t('featuredJobs.tags.design'), t('featuredJobs.tags.creative'), t('featuredJobs.tags.junior')],
+      description: "Opportunité parfaite pour débuter votre carrière en design graphique dans une entreprise leader du secteur créatif.",
+      requirements: ["Diplôme en design graphique", "Maîtrise de la Creative Suite", "Portfolio créatif", "Passion pour le design"],
+      benefits: ["Mentorat senior", "Formation Adobe", "Environnement créatif", "Croissance rapide"]
     },
     {
       id: 4,
@@ -644,7 +695,10 @@ const FeaturedJobsSection = () => {
       color: "bg-gray-800",
       featured: false,
       urgent: false,
-      tags: [t('featuredJobs.tags.product'), t('featuredJobs.tags.design'), t('featuredJobs.tags.ios')]
+      tags: [t('featuredJobs.tags.product'), t('featuredJobs.tags.design'), t('featuredJobs.tags.ios')],
+      description: "Concevez l'avenir des produits Apple en créant des expériences utilisateur exceptionnelles pour des millions d'utilisateurs.",
+      requirements: ["Master en Design", "5+ ans en product design", "Expérience mobile/iOS", "Vision produit forte"],
+      benefits: ["Produits Apple gratuits", "Assurance premium", "Retraite généreuse", "Campus innovant"]
     },
     {
       id: 5,
@@ -658,7 +712,10 @@ const FeaturedJobsSection = () => {
       color: "bg-blue-500",
       featured: true,
       urgent: false,
-      tags: [t('featuredJobs.tags.frontend'), t('featuredJobs.tags.react'), t('featuredJobs.tags.typescript')]
+      tags: [t('featuredJobs.tags.frontend'), t('featuredJobs.tags.react'), t('featuredJobs.tags.typescript')],
+      description: "Développez des interfaces utilisateur modernes et performantes pour nos applications web utilisées par des millions d'utilisateurs.",
+      requirements: ["3+ ans en développement frontend", "Expert React/TypeScript", "Expérience Azure", "Tests automatisés"],
+      benefits: ["Technologies cutting-edge", "Formation continue", "Équipe internationale", "Impact global"]
     },
     {
       id: 6,
@@ -672,7 +729,45 @@ const FeaturedJobsSection = () => {
       color: "bg-red-600",
       featured: false,
       urgent: true,
-      tags: [t('featuredJobs.tags.data'), t('featuredJobs.tags.python'), t('featuredJobs.tags.ml')]
+      tags: [t('featuredJobs.tags.data'), t('featuredJobs.tags.python'), t('featuredJobs.tags.ml')],
+      description: "Utilisez les données pour améliorer l'expérience de nos 200+ millions d'abonnés à travers des recommandations personnalisées.",
+      requirements: ["PhD/Master en Data Science", "Expert Python/R", "Machine Learning avancé", "Big Data (Spark, Hadoop)"],
+      benefits: ["Données Netflix", "Recherche de pointe", "Conférences payées", "Culture data-driven"]
+    },
+    // Jobs supplémentaires pour la vue "Tous les emplois"
+    {
+      id: 7,
+      title: "DevOps Engineer",
+      company: "Amazon",
+      location: "Remote",
+      type: "Full Time",
+      salary: "$95k-$140k",
+      timePosted: "4 jours restants",
+      logo: "https://via.placeholder.com/60x60/ff9900/ffffff?text=A",
+      color: "bg-orange-500",
+      featured: false,
+      urgent: false,
+      tags: ["DevOps", "AWS", "Docker"],
+      description: "Automatisez et optimisez nos infrastructures cloud pour supporter notre croissance mondiale.",
+      requirements: ["5+ ans DevOps", "Expert AWS", "Docker/Kubernetes", "CI/CD pipelines"],
+      benefits: ["AWS credits", "Télétravail", "Stock options", "Formation certifiée"]
+    },
+    {
+      id: 8,
+      title: "Mobile Developer",
+      company: "Spotify",
+      location: "Stockholm",
+      type: "Full Time",
+      salary: "$75k-$110k",
+      timePosted: "1 semaine restante",
+      logo: "https://via.placeholder.com/60x60/1db954/ffffff?text=S",
+      color: "bg-green-600",
+      featured: false,
+      urgent: false,
+      tags: ["Mobile", "iOS", "Android"],
+      description: "Développez l'application mobile utilisée par 400+ millions d'utilisateurs pour écouter leur musique préférée.",
+      requirements: ["3+ ans développement mobile", "Swift/Kotlin", "API REST", "Expérience audio"],
+      benefits: ["Spotify Premium", "Équipe internationale", "Hackathons", "Musique illimitée"]
     }
   ];
 
@@ -702,10 +797,38 @@ const FeaturedJobsSection = () => {
 
   const handleView = (jobId) => {
     setViewedJobs(prev => new Set(prev).add(jobId));
+    const job = featuredJobs.find(j => j.id === jobId);
+    setSelectedJob(job);
+  };
+  const handleNavigation = (route) => {
+    navigate(route);
+  };
+
+  const handleApply = (job) => {
+    setSelectedJob(job);
+    setShowApplicationModal(true);
+  };
+
+  const handleViewAllJobs = () => {
+    setShowAllJobs(true);
+    setVisibleJobs(featuredJobs.length);
+  };
+
+  const handleBackToFeatured = () => {
+    setShowAllJobs(false);
+    setVisibleJobs(4);
+    setSelectedJob(null);
   };
 
   const loadMoreJobs = () => {
     setVisibleJobs(prev => Math.min(prev + 2, featuredJobs.length));
+  };
+
+  const submitApplication = (formData) => {
+    // Simulation de soumission
+    alert(`Candidature soumise pour ${selectedJob.title} chez ${selectedJob.company}!\n\nDétails:\n- Nom: ${formData.name}\n- Email: ${formData.email}\n- Téléphone: ${formData.phone}\n\nVous recevrez une confirmation par email.`);
+    setShowApplicationModal(false);
+    setSelectedJob(null);
   };
 
   const JobCard = ({ job, index }) => (
@@ -793,7 +916,7 @@ const FeaturedJobsSection = () => {
 
         <div className="job-footer">
           <div className="job-salary">{job.salary}</div>
-          <button className="apply-btn">
+          <button className="apply-btn" onClick={() => handleApply(job)}>
             {t('featuredJobs.applyNow')}
             <ChevronRight className="w-4 h-4 ml-1" />
           </button>
@@ -802,21 +925,203 @@ const FeaturedJobsSection = () => {
     </div>
   );
 
+  const JobDetailModal = ({ job, onClose }) => (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="job-detail-modal" onClick={e => e.stopPropagation()}>
+        <div className="modal-header">
+          <button className="close-btn" onClick={onClose}>
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        
+        <div className="modal-content">
+          <div className="job-header-detail">
+            <div className={`job-logo-large ${job.color}`}>
+              <span className="text-white font-bold text-2xl">
+                {job.company.charAt(0)}
+              </span>
+            </div>
+            <div className="job-info-detail">
+              <h2 className="job-title-large">{job.title}</h2>
+              <p className="job-company-large">{job.company}</p>
+              <div className="job-meta-detail">
+                <span className="meta-item">
+                  <MapPin className="w-4 h-4" />
+                  {job.location}
+                </span>
+                <span className="meta-item">
+                  <Briefcase className="w-4 h-4" />
+                  {job.type}
+                </span>
+                <span className="meta-item">
+                  <Clock className="w-4 h-4" />
+                  {job.timePosted}
+                </span>
+              </div>
+            </div>
+            <div className="job-salary-large">{job.salary}</div>
+          </div>
+
+          <div className="job-description-section">
+            <h3>Description du poste</h3>
+            <p>{job.description}</p>
+          </div>
+
+          <div className="job-requirements-section">
+            <h3>Exigences</h3>
+            <ul>
+              {job.requirements.map((req, index) => (
+                <li key={index}>{req}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="job-benefits-section">
+            <h3>Avantages</h3>
+            <ul>
+              {job.benefits.map((benefit, index) => (
+                <li key={index}>{benefit}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="modal-actions">
+            <button className="apply-btn-large" onClick={() => handleApply(job)}>
+              Postuler à ce poste
+              <ExternalLink className="w-5 h-5 ml-2" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const ApplicationModal = ({ job, onClose, onSubmit }) => {
+    const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      phone: '',
+      coverLetter: '',
+      resume: null
+    });
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (formData.name && formData.email) {
+        onSubmit(formData);
+      } else {
+        alert('Veuillez remplir tous les champs obligatoires.');
+      }
+    };
+
+    return (
+      <div className="modal-overlay" onClick={onClose}>
+        <div className="application-modal" onClick={e => e.stopPropagation()}>
+          <div className="modal-header">
+            <h2>Postuler pour {job.title}</h2>
+            <button className="close-btn" onClick={onClose}>
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="application-form">
+            <div className="form-group">
+              <label>Nom complet *</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({...prev, name: e.target.value}))}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Email *</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Téléphone</label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData(prev => ({...prev, phone: e.target.value}))}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Lettre de motivation</label>
+              <label>CV (PDF)</label>
+              <input
+                type="file"
+                accept=".pdf"
+                onChange={(e) => setFormData(prev => ({...prev, resume: e.target.files[0]}))}
+              />
+              <textarea
+                value={formData.coverLetter}
+                onChange={(e) => setFormData(prev => ({...prev, coverLetter: e.target.value}))}
+                rows={4}
+                placeholder="Expliquez pourquoi vous êtes le candidat idéal pour ce poste..."
+              />
+            </div>
+
+            <div className="form-group">
+              <label>CV (PDF)</label>
+              <input
+                type="file"
+                accept=".pdf"
+                onChange={(e) => setFormData(prev => ({...prev, resume: e.target.files[0]}))}
+              />
+            </div>
+
+            <div className="form-actions">
+              <button type="button" className="cancel-btn" onClick={onClose}>
+                Annuler
+              </button>
+              <button type="submit" className="submit-btn">
+                Envoyer ma candidature
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section className="featured-jobs-section">
       <div className="container">
+        {showAllJobs && (
+          <button className="back-btn" onClick={handleBackToFeatured}>
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Retour aux emplois en vedette
+          </button>
+        )}
+
         <div className="section-header">
           <div className="section-title-container">
-            <h2 className="section-title">{t('featuredJobs.title')}</h2>
+            <h2 className="section-title">
+              {showAllJobs ? 'Tous les Emplois' : t('featuredJobs.title')}
+            </h2>
             <div className="title-underline"></div>
           </div>
           <p className="section-subtitle">
-            {t('featuredJobs.subtitle')}
+            {showAllJobs 
+              ? `${featuredJobs.length} opportunités disponibles`
+              : t('featuredJobs.subtitle')
+            }
           </p>
-          <button className="view-all-btn">
-            {t('featuredJobs.viewAllJobs')}
-            <ChevronRight className="w-4 h-4 ml-1" />
-          </button>
+          {!showAllJobs && (
+            <button className="view-all-btn" onClick={() => handleNavigation('/jobs')}>
+              {t('featuredJobs.viewAllJobs')}
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </button>
+          )}
         </div>
 
         <div className="jobs-grid">
@@ -825,7 +1130,7 @@ const FeaturedJobsSection = () => {
           ))}
         </div>
 
-        {visibleJobs < featuredJobs.length && (
+        {!showAllJobs && visibleJobs < featuredJobs.length && (
           <div className="load-more-container">
             <button className="load-more-btn" onClick={loadMoreJobs}>
               <Users className="w-4 h-4 mr-2" />
@@ -834,6 +1139,24 @@ const FeaturedJobsSection = () => {
           </div>
         )}
       </div>
+
+      {selectedJob && !showApplicationModal && (
+        <JobDetailModal 
+          job={selectedJob} 
+          onClose={() => setSelectedJob(null)} 
+        />
+      )}
+
+      {showApplicationModal && selectedJob && (
+        <ApplicationModal 
+          job={selectedJob}
+          onClose={() => {
+            setShowApplicationModal(false);
+            setSelectedJob(null);
+          }}
+          onSubmit={submitApplication}
+        />
+      )}
 
       <style jsx>{`
         .featured-jobs-section {

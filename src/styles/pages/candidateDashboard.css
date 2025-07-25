@@ -50,6 +50,15 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.breadcrumb-item.clickable {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-item.clickable:hover {
+  color: #3b82f6; /* ou la couleur de votre thème */
+  text-decoration: underline;
+}
 
 /* Base styles */
 .dashboard {
@@ -981,3 +990,66 @@
   
   
    }
+
+
+   .welcome-section {
+  position: relative;
+  overflow: hidden;
+  animation: slideInFromTop 0.8s ease-out;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-decoration {
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  50% { transform: translateY(-50%) rotate(10deg); }
+}
+
+
+
+/* Message de bienvenue */
+.welcome-message {
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Ajustement du titre principal */
+.dashboard-title {
+  font-size: 1.5rem; /* Réduit de h1 à h2 */
+}

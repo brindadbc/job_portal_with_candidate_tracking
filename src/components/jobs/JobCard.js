@@ -17,7 +17,7 @@ const JobCard = ({ job }) => {
       </div>
       
       <div className="job-salary">
-        💰 {job.salary}€/an
+        💰 {job.salary}
       </div>
       
       <div className="job-description">

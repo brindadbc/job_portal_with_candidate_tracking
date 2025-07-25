@@ -1,0 +1,161 @@
+/* Général */
+.my-jobs-container {
+  background-color: #f9fafb;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+}
+
+.header {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Carte d'offre */
+.job-card {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  animation: fadeInUp 0.4s ease;
+  transition: box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.job-meta {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-actif {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-pause {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.status-ferme {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.status-brouillon {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.type-cdi {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+.type-cdd {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+.type-stage {
+  background-color: #ffedd5;
+  color: #c2410c;
+}
+
+.type-freelance {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+/* Boutons secondaires */
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+.skill-badge {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

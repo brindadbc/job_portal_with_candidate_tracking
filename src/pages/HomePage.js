@@ -17,7 +17,7 @@ const HomePage = () => {
       <div 
         className="hero-section"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(79, 70, 229, 0.3) 100%), url(${backgroundImage})`,
+          backgroundImage: `linear-gradient(135deg, rgba(6, 96, 194, 0.3) 0%, rgba(14, 150, 212, 0.873) 100%), url(${backgroundImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'

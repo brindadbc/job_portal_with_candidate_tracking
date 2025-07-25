@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/pages/candidateDashboard.css';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   User, 
   Briefcase, 
@@ -21,8 +22,29 @@ import {
 } from 'lucide-react';
 
 const CandidateDashboard = () => {
+  const { user } = useAuth();
   const [selectedPeriod, setSelectedPeriod] = useState('7d');
   const [animatedStats, setAnimatedStats] = useState({});
+
+  // Fonction pour obtenir le prénom de l'utilisateur
+  const getUserFirstName = () => {
+    if (!user || !user.name) return 'Utilisateur';
+    return user.name.split(' ')[0];
+  };
+
+  // Fonction pour le message de bienvenue selon l'heure
+  const getWelcomeMessage = () => {
+    const hour = new Date().getHours();
+    const firstName = getUserFirstName();
+    
+    if (hour < 12) {
+      return `Bonjour ${firstName} !`;
+    } else if (hour < 18) {
+      return `Bon après-midi ${firstName} !`;
+    } else {
+      return `Bonsoir ${firstName} !`;
+    }
+  };
 
   // Animation des statistiques
   useEffect(() => {
@@ -206,9 +228,15 @@ const CandidateDashboard = () => {
         </div>
 
         <div className="dashboard-content">
+          {/* Message de bienvenue personnalisé */}
+          <div className="welcome-message">
+            <h1 className="welcome-title">{getWelcomeMessage()}</h1>
+            <p className="welcome-subtitle">Voici un aperçu de vos activités récentes</p>
+          </div>
+
           <div className="dashboard-header">
             <div>
-              <h1 className="dashboard-title">Tableau de bord Candidat</h1>
+              <h2 className="dashboard-title">Tableau de bord Candidat</h2>
               <p className="dashboard-subtitle">Suivez l'évolution de vos candidatures</p>
             </div>
             <div className="header-actions">

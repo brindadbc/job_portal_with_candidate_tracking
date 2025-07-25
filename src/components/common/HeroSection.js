@@ -106,7 +106,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import heroImage from '../../assets/images/pers3.png';
+import heroImage from '../../assets/images/kk.png';
 
 const HeroSection = () => {
   const { t } = useTranslation();

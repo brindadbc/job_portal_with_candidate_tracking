@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import Navbar from '../components/common/Navbar';
+import '../styles/pages/Footer.css';
 
 const CompanyPage = () => {
   const [companies, setCompanies] = useState([]);

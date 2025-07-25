@@ -27,7 +27,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(79, 70, 229, 0.2) 100%);
+            /* background: linear-gradient(135deg, rgba(60, 96, 194, 0.3) 0%, rgba(107, 103, 195, 0.2) 100%); */
             z-index: 1;
         }
 
@@ -38,7 +38,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(ellipse at center, transparent 0%, rgba(30, 58, 138, 0.3) 70%);
+            background: radial-gradient(ellipse at center, transparent 0%,transparent 70%);
             z-index: 1;
         }
 
@@ -49,7 +49,7 @@
 
         .navbar {
             padding: 1rem 0;
-             background:  linear-gradient(135deg, rgba(30, 58, 138, 0.4) 0%, rgba(79, 70, 229, 0.3) 100%);
+             background:  linear-gradient(135deg, rgba(40, 106, 193, 0.893) 0%, rgba(18, 118, 175, 0.849) 100%);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
@@ -187,7 +187,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #64748b;
+  color: #eceef0;
 }
 
 .notification-bell:hover,
@@ -212,6 +212,55 @@
   line-height: 1;
 }
 
+/* Badge admin sur l'avatar */
+.profile-avatar {
+  position: relative;
+}
+
+.admin-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* Style pour le rôle admin */
+.admin-role {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+/* Section titre dans le dropdown */
+.dropdown-section-title {
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Items admin avec style spécial */
+.admin-item {
+  background: rgba(220, 53, 69, 0.05);
+  border-left: 3px solid #dc3545;
+}
+
+.admin-item:hover {
+  background: rgba(220, 53, 69, 0.1);
+}
+
 /* Dropdown profil */
 .profile-dropdown {
   position: relative;
@@ -221,12 +270,13 @@
   padding: 0.5rem 1rem;
   border-radius: 12px;
   cursor: pointer;
+  background-color: #215bb8;
   transition: all 0.3s ease;
   border: 1px solid transparent;
 }
 
 .profile-dropdown:hover {
-  background: rgba(59, 130, 246, 0.05);
+  background: rgba(51, 51, 95, 0.19);
   border-color: rgba(59, 130, 246, 0.2);
 }
 
@@ -465,7 +515,7 @@
         .stat-label {
             font-size: 0.9rem;
             opacity: 0.9;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px white;
         }
 
         .hero-visual {
@@ -911,7 +961,7 @@
 
 /* Footer Styles */
 .footer {
-  background: linear-gradient(135deg, #1e3a8a 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #325cd0 0%, #4f46e5 100%);
   color: white;
   padding: 60px 0 0;
   margin-top: 80px;
