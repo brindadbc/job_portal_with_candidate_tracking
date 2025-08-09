@@ -391,7 +391,7 @@ const RegisterPage = () => {
       
       if (result.success) {
         toast.success(result.message);
-        navigate('/dashboard');
+        navigate('/login');
       } else {
         toast.error(result.message);
       }

@@ -79,31 +79,35 @@
     "next": "Weiter",
     "previous": "Zurück"
   },
-  "featuredJobs": {
-      "title": "Ausgewählte Stellenangebote",
-      "subtitle": "Entdecken Sie die besten Möglichkeiten von Top-Unternehmen",
-      "viewAllJobs": "Alle Stellenangebote Anzeigen",
-      "loadMoreJobs": "Mehr Stellenangebote Laden",
+ "featuredJobs": {
+      "title": "Empfohlene Jobs",
+      "subtitle": "Entdecken Sie die besten Möglichkeiten von führenden Unternehmen",
+      "viewAllJobs": "Alle Jobs Anzeigen",
+      "loadMoreJobs": "Weitere Jobs Laden",
       "applyNow": "Jetzt Bewerben",
-      "featured": "Ausgewählt",
+      "featured": "Empfohlen",
+      "urgent": "Dringend",
       "remoteWork": "Remote-Arbeit",
       "fullTime": "Vollzeit",
       "partTime": "Teilzeit",
       "contract": "Vertrag",
+      "freelance": "Freelance",
       "internship": "Praktikum",
-      "daysRemaining": "{{count}} Tag verbleibend",
-      "daysRemaining_plural": "{{count}} Tage verbleibend",
+      "daysRemaining": "{{count}} Tage verbleibend",
       "weekRemaining": "{{count}} Woche verbleibend",
-      "weekRemaining_plural": "{{count}} Wochen verbleibend",
+      "weeksRemaining": "{{count}} Wochen verbleibend",
       "monthRemaining": "{{count}} Monat verbleibend",
-      "monthRemaining_plural": "{{count}} Monate verbleibend",
-      "newJob": "Neu",
-      "urgent": "Dringend",
-      "salaryRange": "{{min}} - {{max}}",
-      "location": "Standort",
-      "jobType": "Stellentyp",
-      "timePosted": "Veröffentlicht",
-      "company": "Unternehmen",
+      "monthsRemaining": "{{count}} Monate verbleibend",
+      "allJobs": "Alle Jobs",
+      "opportunitiesAvailable": "{{count}} Möglichkeiten verfügbar",
+      "backToFeatured": "Zurück zu empfohlenen Jobs",
+      "actions": {
+        "view": "Anzeigen",
+        "save": "Speichern",
+        "like": "Gefällt mir",
+        "share": "Teilen",
+        "apply": "Bewerben"
+      },
       "tags": {
         "design": "Design",
         "remote": "Remote",
@@ -116,21 +120,66 @@
         "product": "Produkt",
         "ios": "iOS",
         "frontend": "Frontend",
+        "backend": "Backend",
+        "fullstack": "Full Stack",
         "typescript": "TypeScript",
         "data": "Daten",
         "python": "Python",
-        "ml": "Maschinelles Lernen"
+        "ml": "ML",
+        "devops": "DevOps",
+        "aws": "AWS",
+        "docker": "Docker",
+        "kubernetes": "Kubernetes",
+        "mobile": "Mobile",
+        "android": "Android",
+        "marketing": "Marketing",
+        "sales": "Vertrieb",
+        "finance": "Finanzen",
+        "hr": "Personalwesen"
       },
-      "actions": {
-        "like": "Gefällt mir",
-        "view": "Anzeigen",
-        "save": "Speichern",
-        "share": "Teilen"
+      "modal": {
+        "jobDescription": "Stellenbeschreibung",
+        "requirements": "Anforderungen",
+        "benefits": "Vorteile",
+        "applyToPosition": "Auf diese Stelle bewerben",
+        "close": "Schließen"
       },
-      "status": {
-        "applied": "Beworben",
-        "saved": "Gespeichert",
-        "viewed": "Angesehen"
-      }
+      "application": {
+        "title": "Bewerbung für {{jobTitle}}",
+        "fullName": "Vollständiger Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "coverLetter": "Anschreiben",
+        "coverLetterPlaceholder": "Erklären Sie, warum Sie der ideale Kandidat für diese Position sind...",
+        "resume": "Lebenslauf (PDF)",
+        "portfolio": "Portfolio (optional)",
+        "linkedIn": "LinkedIn-Profil (optional)",
+        "website": "Persönliche Website (optional)",
+        "requiredField": "Pflichtfeld",
+        "submitApplication": "Bewerbung Senden",
+        "cancel": "Abbrechen",
+        "success": "Bewerbung erfolgreich gesendet!",
+        "successMessage": "Bewerbung für {{jobTitle}} bei {{company}} eingereicht!\n\nDetails:\n- Name: {{name}}\n- E-Mail: {{email}}\n- Telefon: {{phone}}\n\nSie erhalten eine Bestätigungs-E-Mail.",
+        "error": "Bitte füllen Sie alle Pflichtfelder aus.",
+        "fileError": "Nicht unterstütztes Dateiformat. Bitte verwenden Sie eine PDF-Datei."
+      },
+      "filters": {
+        "location": "Standort",
+        "jobType": "Jobtyp",
+        "experience": "Erfahrung",
+        "salary": "Gehalt",
+        "company": "Unternehmen",
+        "datePosted": "Veröffentlichungsdatum",
+        "clearFilters": "Filter Löschen"
+      },
+      "sort": {
+        "relevance": "Relevanz",
+        "date": "Datum",
+        "salary": "Gehalt",
+        "company": "Unternehmen",
+        "title": "Titel"
+      },
+      "noResults": "Keine Jobs gefunden",
+      "noResultsMessage": "Versuchen Sie, Ihre Suchkriterien zu ändern oder durchsuchen Sie alle verfügbaren Stellen."
     }
   }

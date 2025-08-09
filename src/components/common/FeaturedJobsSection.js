@@ -583,6 +583,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronRight, MapPin, Clock, Users, Briefcase, Star, Eye, Heart, Bookmark, Share2, X, ArrowLeft, ExternalLink } from 'lucide-react';
 
 const FeaturedJobsSection = () => {
+  const { t } = useTranslation();
   const [visibleJobs, setVisibleJobs] = useState(4);
     const navigate = useNavigate();
   const [likedJobs, setLikedJobs] = useState(new Set());
@@ -594,41 +595,41 @@ const FeaturedJobsSection = () => {
 
   // Mock translation function
  
-  const t = (key, options = {}) => {
-    const translations = {
-      'featuredJobs.title': 'Emplois en Vedette',
-      'featuredJobs.subtitle': 'Découvrez les meilleures opportunités des entreprises de premier plan',
-      'featuredJobs.viewAllJobs': 'Voir Tous les Emplois',
-      'featuredJobs.loadMoreJobs': 'Charger Plus d\'Emplois',
-      'featuredJobs.applyNow': 'Postuler Maintenant',
-      'featuredJobs.featured': 'En Vedette',
-      'featuredJobs.urgent': 'Urgent',
-      'featuredJobs.remoteWork': 'Travail à Distance',
-      'featuredJobs.fullTime': 'Temps Plein',
-      'featuredJobs.partTime': 'Temps Partiel',
-      'featuredJobs.daysRemaining': `${options.count} jours restants`,
-      'featuredJobs.weekRemaining': `${options.count} semaine restante`,
-      'featuredJobs.actions.view': 'Voir',
-      'featuredJobs.actions.save': 'Sauvegarder',
-      'featuredJobs.actions.like': 'Aimer',
-      'featuredJobs.tags.design': 'Design',
-      'featuredJobs.tags.remote': 'Remote',
-      'featuredJobs.tags.senior': 'Senior',
-      'featuredJobs.tags.engineering': 'Ingénierie',
-      'featuredJobs.tags.javascript': 'JavaScript',
-      'featuredJobs.tags.react': 'React',
-      'featuredJobs.tags.creative': 'Créatif',
-      'featuredJobs.tags.junior': 'Junior',
-      'featuredJobs.tags.product': 'Produit',
-      'featuredJobs.tags.ios': 'iOS',
-      'featuredJobs.tags.frontend': 'Frontend',
-      'featuredJobs.tags.typescript': 'TypeScript',
-      'featuredJobs.tags.data': 'Data',
-      'featuredJobs.tags.python': 'Python',
-      'featuredJobs.tags.ml': 'ML'
-    };
-    return translations[key] || key;
-  };
+  // const t = (key, options = {}) => {
+  //   const translations = {
+  //     'featuredJobs.title': 'Emplois en Vedette',
+  //     'featuredJobs.subtitle': 'Découvrez les meilleures opportunités des entreprises de premier plan',
+  //     'featuredJobs.viewAllJobs': 'Voir Tous les Emplois',
+  //     'featuredJobs.loadMoreJobs': 'Charger Plus d\'Emplois',
+  //     'featuredJobs.applyNow': 'Postuler Maintenant',
+  //     'featuredJobs.featured': 'En Vedette',
+  //     'featuredJobs.urgent': 'Urgent',
+  //     'featuredJobs.remoteWork': 'Travail à Distance',
+  //     'featuredJobs.fullTime': 'Temps Plein',
+  //     'featuredJobs.partTime': 'Temps Partiel',
+  //     'featuredJobs.daysRemaining': `${options.count} jours restants`,
+  //     'featuredJobs.weekRemaining': `${options.count} semaine restante`,
+  //     'featuredJobs.actions.view': 'Voir',
+  //     'featuredJobs.actions.save': 'Sauvegarder',
+  //     'featuredJobs.actions.like': 'Aimer',
+  //     'featuredJobs.tags.design': 'Design',
+  //     'featuredJobs.tags.remote': 'Remote',
+  //     'featuredJobs.tags.senior': 'Senior',
+  //     'featuredJobs.tags.engineering': 'Ingénierie',
+  //     'featuredJobs.tags.javascript': 'JavaScript',
+  //     'featuredJobs.tags.react': 'React',
+  //     'featuredJobs.tags.creative': 'Créatif',
+  //     'featuredJobs.tags.junior': 'Junior',
+  //     'featuredJobs.tags.product': 'Produit',
+  //     'featuredJobs.tags.ios': 'iOS',
+  //     'featuredJobs.tags.frontend': 'Frontend',
+  //     'featuredJobs.tags.typescript': 'TypeScript',
+  //     'featuredJobs.tags.data': 'Data',
+  //     'featuredJobs.tags.python': 'Python',
+  //     'featuredJobs.tags.ml': 'ML'
+  //   };
+  //   return translations[key] || key;
+  // };
 
   // Données d'exemple des offres d'emploi étendues
   const featuredJobs = [

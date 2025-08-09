@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/pages/candidateDashboard.css';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { 
   User, 
@@ -21,7 +22,9 @@ import {
   BarChart3
 } from 'lucide-react';
 
+
 const CandidateDashboard = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [selectedPeriod, setSelectedPeriod] = useState('7d');
   const [animatedStats, setAnimatedStats] = useState({});
@@ -30,6 +33,9 @@ const CandidateDashboard = () => {
   const getUserFirstName = () => {
     if (!user || !user.name) return 'Utilisateur';
     return user.name.split(' ')[0];
+  };
+   const handleNavigation = (route) => {
+    navigate(route);
   };
 
   // Fonction pour le message de bienvenue selon l'heure
@@ -161,31 +167,32 @@ const CandidateDashboard = () => {
             <BarChart3 className="w-5 h-5" />
             <span>Tableau de bord</span>
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => handleNavigation('/CandidateProfilPage')}>
             <User className="w-5 h-5" />
             <span>Mon profil</span>
           </div>
-          <div className="nav-item">
+        
+          <div  className="nav-item" onClick={() => handleNavigation('/Applications')}>
             <Briefcase className="w-5 h-5" />
             <span>Mes candidatures</span>
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => handleNavigation('/Messages')}>
             <MessageSquare className="w-5 h-5" />
             <span>Messages</span>
             <span className="nav-badge">3</span>
           </div>
-          <div className="nav-item">
+          <div className="nav-item"onClick={() => handleNavigation('/c-Notifications')}>
             <Bell className="w-5 h-5" />
             <span>Notifications</span>
           </div>
         </div>
         
         <div className="nav-section">
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => handleNavigation('/settings')}>
             <Settings className="w-5 h-5" />
             <span>Paramètres</span>
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => handleNavigation('/')}>
             <LogOut className="w-5 h-5" />
             <span>Déconnexion</span>
           </div>
@@ -201,7 +208,13 @@ const CandidateDashboard = () => {
       <div className="main-content">
         <div className="top-bar">
           <div className="breadcrumb">
-            <span className="breadcrumb-item">Accueil</span>
+           <span 
+              className="breadcrumb-item clickable" 
+              onClick={() => navigate('/')}
+              style={{ cursor: 'pointer' }}
+            >
+              Accueil
+            </span>
             <span className="breadcrumb-separator">/</span>
             <span className="breadcrumb-item active">Tableau de bord Candidat</span>
           </div>
@@ -240,11 +253,11 @@ const CandidateDashboard = () => {
               <p className="dashboard-subtitle">Suivez l'évolution de vos candidatures</p>
             </div>
             <div className="header-actions">
-              <button className="btn-secondary">
+              {/* <button className="btn-secondary">
                 <Download className="w-4 h-4 mr-2" />
                 Exporter CV
-              </button>
-              <button className="btn-primary">
+              </button> */}
+              <button className="btn-primary" onClick={() => handleNavigation('/postuler')} >
                 <Plus className="w-4 h-4 mr-2" />
                 Nouvelle candidature
               </button>
@@ -261,7 +274,7 @@ const CandidateDashboard = () => {
             <div className="dashboard-card">
               <div className="card-header">
                 <h3 className="card-title">Candidatures récentes</h3>
-                <button className="btn-icon">
+                <button className="btn-icon" onClick={() => handleNavigation('/Applications')}>
                   <MoreHorizontal className="w-4 h-4" />
                 </button>
               </div>
@@ -280,7 +293,7 @@ const CandidateDashboard = () => {
                       <span className={`status-badge ${getStatusColor(app.status)}`}>
                         {app.status}
                       </span>
-                      <button className="btn-icon">
+                      <button className="btn-icon" onClick={() => handleNavigation('/Applications')}>
                         <Eye className="w-4 h-4" />
                       </button>
                     </div>
@@ -313,7 +326,7 @@ const CandidateDashboard = () => {
             <div className="dashboard-card">
               <div className="card-header">
                 <h3 className="card-title">Prochains entretiens</h3>
-                <button className="btn-text">Voir tout</button>
+                <button className="btn-text" onClick={() => handleNavigation('/Applications')}>Voir tout</button>
               </div>
               <div className="interviews-list">
                 <div className="interview-item">

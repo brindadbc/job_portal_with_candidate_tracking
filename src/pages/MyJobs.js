@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useJobs } from '../contexts/JobsContext';
 import { 
   Plus, 
   Search, 
@@ -15,11 +17,25 @@ import {
   ArrowLeft,
   Briefcase,
   ChevronDown,
-  ExternalLink
+  ExternalLink,
+  FileText,
+  Send
 } from 'lucide-react';
 
 const MyJobs = () => {
   const navigate = useNavigate();
+  const { 
+    jobs, 
+    loading,
+    error,
+    fetchMyJobs,
+    deleteJob, 
+    deleteJobs, 
+    updateJobStatus, 
+    updateJobsStatus, 
+    duplicateJob 
+  } = useJobs();
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [selectedSort, setSelectedSort] = useState('newest');
@@ -27,84 +43,62 @@ const MyJobs = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
-  const [jobs, setJobs] = useState([
-    {
-      id: 1,
-      title: 'Senior React Developer',
-      department: 'Engineering',
-      location: 'Paris, France',
-      type: 'CDI',
-      salary: '55k-70k €',
-      applicants: 45,
-      status: 'Actif',
-      createdAt: '2024-01-15',
-      expiresAt: '2024-03-15',
-      views: 234,
-      description: 'Nous recherchons un développeur React senior pour rejoindre notre équipe...',
-      skills: ['React', 'JavaScript', 'TypeScript', 'Node.js']
-    },
-    {
-      id: 2,
-      title: 'UX Designer',
-      department: 'Design',
-      location: 'Remote',
-      type: 'CDI',
-      salary: '45k-55k €',
-      applicants: 23,
-      status: 'Actif',
-      createdAt: '2024-01-12',
-      expiresAt: '2024-03-12',
-      views: 156,
-      description: 'Poste de UX Designer pour concevoir des interfaces utilisateur...',
-      skills: ['Figma', 'Adobe XD', 'Prototyping', 'User Research']
-    },
-    {
-      id: 3,
-      title: 'Product Manager',
-      department: 'Product',
-      location: 'Lyon, France',
-      type: 'CDI',
-      salary: '60k-75k €',
-      applicants: 67,
-      status: 'Fermé',
-      createdAt: '2024-01-10',
-      expiresAt: '2024-03-10',
-      views: 489,
-      description: 'Product Manager expérimenté pour diriger nos initiatives produit...',
-      skills: ['Agile', 'Scrum', 'Analytics', 'Leadership']
-    },
-    {
-      id: 4,
-      title: 'DevOps Engineer',
-      department: 'Engineering',
-      location: 'Marseille, France',
-      type: 'CDI',
-      salary: '50k-65k €',
-      applicants: 34,
-      status: 'Brouillon',
-      createdAt: '2024-01-08',
-      expiresAt: '2024-03-08',
-      views: 78,
-      description: 'Ingénieur DevOps pour optimiser nos processus de déploiement...',
-      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD']
-    },
-    {
-      id: 5,
-      title: 'Data Scientist',
-      department: 'Data',
-      location: 'Paris, France',
-      type: 'CDD',
-      salary: '45k-60k €',
-      applicants: 28,
-      status: 'En pause',
-      createdAt: '2024-01-05',
-      expiresAt: '2024-03-05',
-      views: 201,
-      description: 'Data Scientist pour analyser et interpréter nos données...',
-      skills: ['Python', 'R', 'Machine Learning', 'SQL']
-    }
-  ]);
+  // Charger les offres au montage du composant
+  useEffect(() => {
+    fetchMyJobs();
+  }, []);
 
+  // Recharger les offres quand les filtres changent
+  useEffect(() => {
+    const filters = {
+      status: selectedStatus,
+      search: searchQuery,
+      sort: selectedSort
+    };
+    fetchMyJobs(filters);
+  }, [selectedStatus, searchQuery, selectedSort]);
+const formatSalary = (salary) => {
+  // Si salary est null, undefined ou vide
+  if (!salary) {
+    return 'Salaire non spécifié';
+  }
+  
+  // Si salary est déjà une chaîne de caractères
+  if (typeof salary === 'string') {
+    return salary;
+  }
+  
+  // Si salary est un objet avec les propriétés min, max, currency, period
+  if (typeof salary === 'object') {
+    const { min, max, currency = 'EUR', period = 'yearly' } = salary;
+    
+    // Formatage de la devise
+    const currencySymbol = currency === 'EUR' ? '€' : currency === 'USD' ? '$' : currency;
+    
+    // Formatage de la période
+    const periodText = period === 'yearly' ? '/an' : 
+                      period === 'monthly' ? '/mois' : 
+                      period === 'hourly' ? '/h' : '';
+    
+    // Si on a min et max
+    if (min && max) {
+      return `${min.toLocaleString()} - ${max.toLocaleString()} ${currencySymbol}${periodText}`;
+    }
+    
+    // Si on a seulement min
+    if (min) {
+      return `À partir de ${min.toLocaleString()} ${currencySymbol}${periodText}`;
+    }
+    
+    // Si on a seulement max
+    if (max) {
+      return `Jusqu'à ${max.toLocaleString()} ${currencySymbol}${periodText}`;
+    }
+  }
+  
+  // Fallback
+  return 'Salaire non spécifié';
+};
   const getStatusColor = (status) => {
     switch (status) {
       case 'Actif': return 'status-active';
@@ -127,7 +121,7 @@ const MyJobs = () => {
 
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         job.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         (job.department || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
                          job.location.toLowerCase().includes(searchQuery.toLowerCase());
     
     const matchesStatus = selectedStatus === 'all' || job.status === selectedStatus;
@@ -142,51 +136,54 @@ const MyJobs = () => {
       case 'oldest':
         return new Date(a.createdAt) - new Date(b.createdAt);
       case 'applicants':
-        return b.applicants - a.applicants;
+        return (b.applicants || 0) - (a.applicants || 0);
       case 'views':
-        return b.views - a.views;
+        return (b.views || 0) - (a.views || 0);
       default:
         return 0;
     }
   });
 
-  const handleJobAction = (action, jobId) => {
+  // Modifier les fonctions d'action pour utiliser les nouvelles fonctions async
+  const handleJobAction = async (action, jobId) => {
     setActiveDropdown(null);
-    switch(action) {
-      case 'view':
-        navigate(`/job/${jobId}`);
-        break;
-      case 'edit':
-        navigate(`/job/edit/${jobId}`);
-        break;
-      case 'duplicate':
-        const jobToDuplicate = jobs.find(job => job.id === jobId);
-        if (jobToDuplicate) {
-          const newJob = {
-            ...jobToDuplicate,
-            id: Date.now(),
-            title: `${jobToDuplicate.title} (Copie)`,
-            status: 'Brouillon',
-            createdAt: new Date().toISOString().split('T')[0],
-            applicants: 0,
-            views: 0
-          };
-          setJobs(prev => [newJob, ...prev]);
-        }
-        break;
-      case 'delete':
-        setJobs(prev => prev.filter(job => job.id !== jobId));
-        break;
-      case 'pause':
-        setJobs(prev => prev.map(job => 
-          job.id === jobId ? { ...job, status: 'En pause' } : job
-        ));
-        break;
-      case 'activate':
-        setJobs(prev => prev.map(job => 
-          job.id === jobId ? { ...job, status: 'Actif' } : job
-        ));
-        break;
+    
+    try {
+      switch(action) {
+        case 'view':
+          navigate(`/job/${jobId}`);
+          break;
+        case 'edit':
+          navigate(`/job/edit/${jobId}`);
+          break;
+        case 'duplicate':
+          const duplicatedId = await duplicateJob(jobId);
+          if (duplicatedId) {
+            // Recharger les offres pour voir la nouvelle offre dupliquée
+            fetchMyJobs();
+          }
+          break;
+        case 'delete':
+          if (window.confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')) {
+            const success = await deleteJob(jobId);
+            if (success) {
+              // Les données sont automatiquement mises à jour via le context
+            }
+          }
+          break;
+        case 'pause':
+          await updateJobStatus(jobId, 'En pause');
+          break;
+        case 'activate':
+          await updateJobStatus(jobId, 'Actif');
+          break;
+        case 'publish':
+          await updateJobStatus(jobId, 'Actif');
+          break;
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'action sur l\'offre:', error);
+      alert('Une erreur est survenue. Veuillez réessayer.');
     }
   };
 
@@ -202,24 +199,40 @@ const MyJobs = () => {
     });
   };
 
-  const handleBulkAction = (action) => {
-    switch(action) {
-      case 'delete':
-        setJobs(prev => prev.filter(job => !selectedJobs.has(job.id)));
-        setSelectedJobs(new Set());
-        break;
-      case 'activate':
-        setJobs(prev => prev.map(job => 
-          selectedJobs.has(job.id) ? { ...job, status: 'Actif' } : job
-        ));
-        setSelectedJobs(new Set());
-        break;
-      case 'pause':
-        setJobs(prev => prev.map(job => 
-          selectedJobs.has(job.id) ? { ...job, status: 'En pause' } : job
-        ));
-        setSelectedJobs(new Set());
-        break;
+  const handleBulkAction = async (action) => {
+    const selectedJobIds = Array.from(selectedJobs);
+    
+    if (selectedJobIds.length === 0) {
+      alert('Veuillez sélectionner au moins une offre.');
+      return;
+    }
+
+    try {
+      switch(action) {
+        case 'delete':
+          if (window.confirm(`Êtes-vous sûr de vouloir supprimer ${selectedJobIds.length} offre(s) ?`)) {
+            const success = await deleteJobs(selectedJobIds);
+            if (success) {
+              setSelectedJobs(new Set());
+            }
+          }
+          break;
+        case 'activate':
+          await updateJobsStatus(selectedJobIds, 'Actif');
+          setSelectedJobs(new Set());
+          break;
+        case 'pause':
+          await updateJobsStatus(selectedJobIds, 'En pause');
+          setSelectedJobs(new Set());
+          break;
+        case 'publish':
+          await updateJobsStatus(selectedJobIds, 'Actif');
+          setSelectedJobs(new Set());
+          break;
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'action en masse:', error);
+      alert('Une erreur est survenue. Veuillez réessayer.');
     }
   };
 
@@ -232,21 +245,85 @@ const MyJobs = () => {
     });
   };
 
+  // Ajouter un indicateur de chargement dans le render
+  const renderJobsList = () => {
+    if (loading) {
+      return (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Chargement de vos offres...</p>
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className="error-container">
+          <p>Erreur: {error}</p>
+          <button onClick={() => fetchMyJobs()} className="btn btn-primary">
+            Réessayer
+          </button>
+        </div>
+      );
+    }
+
+    if (jobs.length === 0) {
+      return (
+        <div className="empty-state">
+          <Briefcase className="empty-icon" />
+          <h3 className="empty-title">
+            Aucune offre d'emploi trouvée
+          </h3>
+          <p className="empty-description">
+            {searchQuery || selectedStatus !== 'all' 
+              ? 'Essayez de modifier vos filtres de recherche.'
+              : 'Commencez par créer votre première offre d\'emploi.'
+            }
+          </p>
+          {!searchQuery && selectedStatus === 'all' && (
+            <button
+              onClick={() => navigate('/create-job')}
+              className="empty-action"
+            >
+              <Plus size={16} />
+              Créer une offre
+            </button>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {sortedJobs.map((job) => (
+          <JobCard key={job._id || job.id} job={job} />
+        ))}
+      </>
+    );
+  };
+
   const JobCard = ({ job }) => (
-    <div className="job-card">
+    <div className={`job-card ${job.status === 'Brouillon' ? 'job-card-draft' : ''}`}>
+      {job.status === 'Brouillon' && (
+        <div className="draft-indicator">
+          <FileText size={14} />
+          <span>Brouillon</span>
+        </div>
+      )}
+      
       <div className="job-card-header">
         <div className="job-card-main">
           <input
             type="checkbox"
-            checked={selectedJobs.has(job.id)}
-            onChange={() => handleSelectJob(job.id)}
+            checked={selectedJobs.has(job._id || job.id)}
+            onChange={() => handleSelectJob(job._id || job.id)}
             className="job-checkbox"
           />
           <div className="job-info">
-            <h3 className="job-title" onClick={() => handleJobAction('view', job.id)}>
-              {job.title}
+            <h3 className="job-title" onClick={() => handleJobAction('view', job._id || job.id)}>
+              {job.title || 'Sans titre'}
             </h3>
-            <p className="job-department">{job.department}</p>
+            <p className="job-department">{job.department || 'Département non spécifié'}</p>
           </div>
         </div>
         
@@ -260,39 +337,46 @@ const MyJobs = () => {
               className="dropdown-trigger"
               onClick={(e) => {
                 e.stopPropagation();
-                setActiveDropdown(activeDropdown === job.id ? null : job.id);
+                setActiveDropdown(activeDropdown === (job._id || job.id) ? null : (job._id || job.id));
               }}
             >
               <MoreHorizontal size={16} />
             </button>
             
-            {activeDropdown === job.id && (
+            {activeDropdown === (job._id || job.id) && (
               <div className="dropdown-menu">
-                <button onClick={() => handleJobAction('view', job.id)} className="dropdown-item">
+                <button onClick={() => handleJobAction('view', job._id || job.id)} className="dropdown-item">
                   <Eye size={16} />
                   Voir l'offre
                 </button>
-                <button onClick={() => handleJobAction('edit', job.id)} className="dropdown-item">
+                <button onClick={() => handleJobAction('edit', job._id || job.id)} className="dropdown-item">
                   <Edit size={16} />
                   Modifier
                 </button>
-                <button onClick={() => handleJobAction('duplicate', job.id)} className="dropdown-item">
+                <button onClick={() => handleJobAction('duplicate', job._id || job.id)} className="dropdown-item">
                   <ExternalLink size={16} />
                   Dupliquer
                 </button>
                 <div className="dropdown-divider"></div>
-                {job.status === 'Actif' ? (
-                  <button onClick={() => handleJobAction('pause', job.id)} className="dropdown-item">
+                
+                {job.status === 'Brouillon' ? (
+                  <button onClick={() => handleJobAction('publish', job._id || job.id)} className="dropdown-item action-publish">
+                    <Send size={16} />
+                    Publier
+                  </button>
+                ) : job.status === 'Actif' ? (
+                  <button onClick={() => handleJobAction('pause', job._id || job.id)} className="dropdown-item">
                     <Clock size={16} />
                     Mettre en pause
                   </button>
                 ) : (
-                  <button onClick={() => handleJobAction('activate', job.id)} className="dropdown-item action-activate">
+                  <button onClick={() => handleJobAction('activate', job._id || job.id)} className="dropdown-item action-activate">
                     <Clock size={16} />
                     Activer
                   </button>
                 )}
-                <button onClick={() => handleJobAction('delete', job.id)} className="dropdown-item action-delete">
+                
+                <button onClick={() => handleJobAction('delete', job._id || job.id)} className="dropdown-item action-delete">
                   <Trash2 size={16} />
                   Supprimer
                 </button>
@@ -315,34 +399,50 @@ const MyJobs = () => {
         </div>
         <div className="job-detail">
           <Users size={16} />
-          {job.applicants} candidatures
+          {job.applicants || 0} candidatures
         </div>
         <div className="job-detail">
           <Eye size={16} />
-          {job.views} vues
+          {job.views || 0} vues
         </div>
       </div>
 
       <div className="job-footer">
         <div className="job-meta">
-          <span className="job-salary">{job.salary}</span>
+          {/* <span className="job-salary">{job.salary || 'Salaire non spécifié'}</span> */}
+          <span className="job-salary">{formatSalary(job.salary)}</span>
           <span className="job-date">
-            Publié le {formatDate(job.createdAt)}
+            {job.status === 'Brouillon' ? 'Sauvegardé' : 'Publié'} le {formatDate(job.createdAt)}
           </span>
         </div>
         
         <div className="job-buttons">
-          <button onClick={() => handleJobAction('view', job.id)} className="btn btn-primary">
-            Voir les candidatures
-          </button>
-          <button onClick={() => handleJobAction('edit', job.id)} className="btn btn-secondary">
-            Modifier
-          </button>
+          {job.status === 'Brouillon' ? (
+            <>
+              <button onClick={() => handleJobAction('edit', job._id || job.id)} className="btn btn-primary">
+                <Edit size={14} />
+                Continuer l'édition
+              </button>
+              <button onClick={() => handleJobAction('publish', job._id || job.id)} className="btn btn-success">
+                <Send size={14} />
+                Publier
+              </button>
+            </>
+          ) : (
+            <>
+              <button onClick={() => handleJobAction('view', job._id || job.id)} className="btn btn-primary">
+                Voir les candidatures
+              </button>
+              <button onClick={() => handleJobAction('edit', job._id || job.id)} className="btn btn-secondary">
+                Modifier
+              </button>
+            </>
+          )}
         </div>
       </div>
 
       <div className="job-skills">
-        {job.skills.map((skill, index) => (
+        {job.skills && job.skills.map((skill, index) => (
           <span key={index} className="skill-tag">
             {skill}
           </span>
@@ -395,6 +495,9 @@ const MyJobs = () => {
           padding: 0.5rem;
           border-radius: 0.5rem;
           transition: color 0.2s;
+          border: none;
+          background: none;
+          cursor: pointer;
         }
 
         .back-button:hover {
@@ -416,7 +519,7 @@ const MyJobs = () => {
 
         .create-job-btn {
           background: #3b82f6;
-          color: #1e293b;
+          color: white;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 0.5rem;
@@ -575,6 +678,15 @@ const MyJobs = () => {
           background: #fecaca;
         }
 
+        .bulk-btn.publish {
+          background: #e0f2fe;
+          color: #0369a1;
+        }
+
+        .bulk-btn.publish:hover {
+          background: #bae6fd;
+        }
+
         .stats-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -633,6 +745,11 @@ const MyJobs = () => {
           color: #ea580c;
         }
 
+        .stat-icon.yellow {
+          background: #fef3c7;
+          color: #d97706;
+        }
+
         .stat-total {
           color: #1e293b;
         }
@@ -649,10 +766,50 @@ const MyJobs = () => {
           color: #ea580c;
         }
 
+        .stat-drafts {
+          color: #d97706;
+        }
+
         .jobs-list {
           display: flex;
           flex-direction: column;
           gap: 1rem;
+        }
+
+        .loading-container {
+          background: #ffffff;
+          border-radius: 0.75rem;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+          padding: 3rem;
+          text-align: center;
+        }
+
+        .loading-spinner {
+          width: 2rem;
+          height: 2rem;
+          border: 3px solid #e2e8f0;
+          border-top: 3px solid #3b82f6;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 1rem auto;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .error-container {
+          background: #ffffff;
+          border-radius: 0.75rem;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+          padding: 3rem;
+          text-align: center;
+          color: #dc2626;
+        }
+
+        .error-container p {
+          margin-bottom: 1rem;
         }
 
         .job-card {
@@ -661,10 +818,31 @@ const MyJobs = () => {
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
           padding: 1.5rem;
           transition: box-shadow 0.2s;
+          position: relative;
         }
 
         .job-card:hover {
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-card-draft {
+          border-left: 4px solid #f59e0b;
+          background: linear-gradient(to right, #fef3c7 0%, #ffffff 5%);
+        }
+
+        .draft-indicator {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          background: #f59e0b;
+          color: white;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.375rem;
+          font-size: 0.75rem;
+          font-weight: 500;
         }
 
         .job-card-header {
@@ -787,8 +965,8 @@ const MyJobs = () => {
           align-items: center;
           gap: 0.5rem;
           width: 100%;
-          padding: 0.75rem;
-          font-size: 0.875rem;
+          padding: 0.5rem;
+          font-size: 0.675rem;
           color: #374151;
           background: none;
           border: none;
@@ -804,6 +982,11 @@ const MyJobs = () => {
         .dropdown-item.action-activate:hover {
           background: #f0fdf4;
           color: #166534;
+        }
+
+        .dropdown-item.action-publish:hover {
+          background: #e0f2fe;
+          color: #0369a1;
         }
 
         .dropdown-item.action-delete:hover {
@@ -905,6 +1088,9 @@ const MyJobs = () => {
           border-radius: 0.375rem;
           cursor: pointer;
           transition: all 0.2s;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
         }
 
         .btn-primary {
@@ -923,6 +1109,15 @@ const MyJobs = () => {
 
         .btn-secondary:hover {
           background: #f3f4f6;
+        }
+
+        .btn-success {
+          background: #ecfdf5;
+          color: #059669;
+        }
+
+        .btn-success:hover {
+          background: #d1fae5;
         }
 
         .job-skills {
@@ -969,7 +1164,7 @@ const MyJobs = () => {
 
         .empty-action {
           background: #3b82f6;
-          color: #1e293b;
+          color: white;
           border: none;
           padding: 0.75rem 1.5rem;
           border-radius: 0.5rem;
@@ -1020,6 +1215,12 @@ const MyJobs = () => {
           .btn {
             flex: 1;
           }
+
+          .draft-indicator {
+            position: static;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+          }
         }
 
         @media (max-width: 480px) {
@@ -1042,32 +1243,27 @@ const MyJobs = () => {
         }
       `}</style>
       
-      <div className="page-container">
-        {/* Header */}
-        <header className="header">
-          <div className="header-content">
-            <div className="header-left">
-              <button
-                onClick={() => navigate('/RecruiterDashboard')}
-                className="back-button"
-              >
-                <ArrowLeft size={20} />
-                Retour
-              </button>
-              <div>
-                <h1 className="header-title">Mes offres d'emploi</h1>
-                <p className="header-subtitle">Gérez vos offres d'emploi et suivez les candidatures</p>
-              </div>
-            </div>
-            <button
-              onClick={() => navigate('/create-job')}
-              className="create-job-btn"
-            >
-              <Plus size={16} />
-              Nouvelle offre
+      {/* return ( */}
+    <div className="page-container">
+      {/* Header */}
+      <header className="header">
+        <div className="header-content">
+          <div className="header-left">
+            <button onClick={() => navigate('/RecruiterDashboard')} className="back-button">
+              <ArrowLeft size={20} />
+              Retour
             </button>
+            <div>
+              <h1 className="header-title">Mes offres d'emploi</h1>
+              <p className="header-subtitle">Gérez vos offres d'emploi et suivez les candidatures</p>
+            </div>
           </div>
-        </header>
+          <button onClick={() => navigate('/create-job')} className="create-job-btn">
+            <Plus size={16} />
+            Nouvelle offre
+          </button>
+        </div>
+      </header>
 
         <main className="main-content">
           {/* Filters and Search */}
@@ -1123,6 +1319,14 @@ const MyJobs = () => {
                     <span className="bulk-count">
                       {selectedJobs.size} sélectionnée(s)
                     </span>
+                    {Array.from(selectedJobs).some(id => jobs.find(j => j.id === id)?.status === 'Brouillon') && (
+                      <button
+                        onClick={() => handleBulkAction('publish')}
+                        className="bulk-btn publish"
+                      >
+                        Publier
+                      </button>
+                    )}
                     <button
                       onClick={() => handleBulkAction('activate')}
                       className="bulk-btn activate"
@@ -1174,31 +1378,31 @@ const MyJobs = () => {
                 </div>
               </div>
             </div>
+
+            {/* <div className="stat-card">
+              <div className="stat-content">
+                <div className="stat-info">
+                  <h3>Brouillons</h3>
+                  <p className="stat-drafts">
+                    {jobs.filter(job => job.status === 'Brouillon').length}
+                  </p>
+                </div>
+                <div className="stat-icon yellow">
+                  <FileText size={24} />
+                </div>
+              </div>
+            </div> */}
             
             <div className="stat-card">
               <div className="stat-content">
                 <div className="stat-info">
                   <h3>Candidatures</h3>
                   <p className="stat-applications">
-                    {jobs.reduce((total, job) => total + job.applicants, 0)}
+                    {jobs.reduce((total, job) => total + (job.applicants || 0), 0)}
                   </p>
                 </div>
                 <div className="stat-icon purple">
                   <Users size={24} />
-                </div>
-              </div>
-            </div>
-            
-            <div className="stat-card">
-              <div className="stat-content">
-                <div className="stat-info">
-                  <h3>Vues totales</h3>
-                  <p className="stat-views">
-                    {jobs.reduce((total, job) => total + job.views, 0)}
-                  </p>
-                </div>
-                <div className="stat-icon orange">
-                  <Eye size={24} />
                 </div>
               </div>
             </div>
@@ -1241,3 +1445,17 @@ const MyJobs = () => {
 };
 
 export default MyJobs;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
